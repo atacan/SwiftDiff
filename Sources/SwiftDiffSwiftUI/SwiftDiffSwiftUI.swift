@@ -29,3 +29,7 @@ public func diffAttributedString(text1: String, text2: String) -> AttributedStri
     let diffs = diff(text1: text1, text2: text2)
     return attributedString(from: diffs)
 }
+
+public func diffAttributedString(_ text1: String, _ text2: String) -> AttributedString {
+    diffAttributedString(text1: text1, text2: text2)
+}
