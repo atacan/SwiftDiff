@@ -11,10 +11,16 @@ func attributedString(from diffs: [Diff]) -> AttributedString {
         case let .delete(text):
             var attrStr = AttributedString(text)
             attrStr.foregroundColor = .red
+            if [" ", "\n"].contains(text) {
+                attrStr.backgroundColor = .red
+            }
             attributedString.append(attrStr)
         case let .insert(text):
             var attrStr = AttributedString(text)
             attrStr.foregroundColor = .green
+            if [" ", "\n"].contains(text) {
+                attrStr.backgroundColor = .green
+            }
             attributedString.append(attrStr)
         case let .equal(text):
             attributedString.append(AttributedString(text))
@@ -33,3 +39,19 @@ public func diffAttributedString(text1: String, text2: String) -> AttributedStri
 public func diffAttributedString(_ text1: String, _ text2: String) -> AttributedString {
     diffAttributedString(text1: text1, text2: text2)
 }
+
+#if DEBUG
+//let original = "Hello, hello space d"
+//let changed = "Hello, \nh ello spaced"
+let original = "a\n"
+let changed = "a"
+
+#Preview {
+    HStack {
+        Text(diffAttributedString(original, changed))
+    }
+    .padding(23)
+    .background(Color(nsColor: .textBackgroundColor))
+}
+
+#endif
