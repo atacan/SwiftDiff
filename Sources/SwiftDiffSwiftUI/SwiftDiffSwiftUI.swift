@@ -51,7 +51,9 @@ let changed = "a"
         Text(diffAttributedString(original, changed))
     }
     .padding(23)
+#if os(macOS)
     .background(Color(nsColor: .textBackgroundColor))
+#endif
 }
 
 #endif
